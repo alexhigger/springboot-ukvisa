@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head">
+
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='bill')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>团组管理页面 >> 团组添加页面</span>
+        </div>
+        <div class="agencyAdd">
+            <form id="addForm" th:action="@{/team}" th:method="post" action="#">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div class="">
+                    <label for="teamname">团组编码：</label>
+                    <input type="text" name="teamname" id="teamname" required/>
+                    <span>*请输入团组编码</span>
+                </div>
+                <div>
+                    <label for="teannum">商品数量：</label>
+                    <input type="text" name="teannum" id="teannum" required/>
+                    <span>*请输入大于0的正自然数，小数点后保留2位</span>
+                </div>
+                <div>
+                    <label for="money">总金额：</label>
+                    <input type="text" name="money" id="money" required/>
+                    <span>*请输入大于0的正自然数，小数点后保留2位</span>
+                </div>
+                <div>
+                    <label >旅行社：</label>
+                    <select name="aid" >
+                        <opaion value="">--请选择相应的旅行社--</opaion>
+                        <option value=""  th:each="a : ${agencys}"
+                                th:value="${a.aid}"
+                                th:text="${a.agencyname}" >北京市粮油总公司</option>
+                    </select>
+                    <span>*请选择旅行社</span>
+                </div>
+                <div>
+                    <label >是否付款：</label>
+                    <input type="radio" value="0" name="vip" checked />非
+                    <input type="radio" value="1" name="vip"/>是
+                </div>
+                <div class="agencyAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="billList.html">返回</a>-->
+                    <input type="button" onclick="$('#addForm').submit();" value="保存" />
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+
+
+</body>
+</html>
+
+
+<!--<div class="">-->
+    <!--<label for="teamname">团组编码：</label>-->
+    <!--<input type="text" name="teamname" id="teamname" required/>-->
+    <!--<span>*请输入团组编码</span>-->
+<!--</div>-->
+<!--<div>-->
+    <!--<label for="teamnum">团组人数：</label>-->
+    <!--<input type="text" name="teamnum" id="teamnum" required/>-->
+    <!--<span>*请输入大于0的正自然数</span>-->
+<!--</div>-->
+<!--<div>-->
+    <!--<label for="money">总金额：</label>-->
+    <!--<input type="text" name="money" id="money" required/>-->
+    <!--<span>*请输入大于0的正自然数，小数点后保留2位</span>-->
+<!--</div>-->
+<!--<div>-->
+    <!--<label >所属旅行社：</label>-->
+    <!--<select name="aid" >-->
+        <!--<option value="">&#45;&#45;请选择相应的旅行社&#45;&#45;</option>-->
+        <!--<option value=""  th:each=" a : ${agencys}"-->
+                <!--th:value="${a.aid}"-->
+                <!--th:text="${a.agencyname}" >旅行社</option>-->
+    <!--</select>-->
+    <!--<span>*请选择旅行社</span>-->
+<!--</div>-->
+<!--<div>-->
+    <!--<label >是否vip：</label>-->
+    <!--<input type="radio" value="0" name="vip" checked />非-->
+    <!--<input type="radio" value="1" name="vip"/>是-->
+<!--</div>-->
+<!--<div class="agencyAddBtn">-->
+    <!--&lt;!&ndash;<a href="#">保存</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;<a href="agencyList.html">返回</a>&ndash;&gt;-->
+    <!--<input type="button" value="保存" onclick="$('#addForm').submit();"/>-->
+    <!--<input type="button" value="返回" onclick="history.back(-1)"/>-->
+<!--</div>-->

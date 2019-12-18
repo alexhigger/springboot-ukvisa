@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head" >
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header"></header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time"></section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>旅行社管理页面 >> 信息查看</span>
+        </div>
+        <div class="agencyView">
+            <p><strong>旅行社编码：</strong><span th:text="${agency.aid}">PRO-CODE—001</span></p>
+            <p><strong>旅行社名称：</strong><span th:text="${agency.agencyname}">测试旅行社001</span></p>
+            <p><strong>联系人：</strong><span th:text="${agency.people}">某某</span></p>
+            <p><strong>联系电话：</strong><span th:text="${agency.phone}">15918230478</span></p>
+            <p><strong>地址：</strong><span th:text="${agency.fax}">15918230478</span></p>
+            <p><strong>传真：</strong><span th:text="${agency.address}">xxxxxxxxx</span></p>
+            <p><strong>描述：</strong><span th:text="${agency.describe}">描述</span></p>
+
+
+
+            <a th:href="@{/agencys}" href="list.html">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+</body>
+</html>

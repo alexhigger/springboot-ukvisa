@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head" >
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header"></header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time"></section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>用户管理页面 >> 用户修改页面</span>
+        </div>
+        <div class="agencyAdd">
+            <form id="updateForm" th:action="@{/user}" th:method="post" action="#">
+                <!--发送put请求修改信息-->
+                <!--1. 在SpringMVC中配置HiddenHttpMethodFilter（SpringBoot自动配置好了）-->
+                <!--2. 页面创建一个method="post"表单-->
+                <!--3. 创建一个input标签 name="_method"，value="指定请求方式"-->
+                <input th:type="hidden" name="_method" value="put">
+
+                <!--隐藏起来，不然会插入空值-->
+                <input th:type="hidden" name="id" th:value="${user.id}">
+                <input th:type="hidden" name="password" th:value="${user.password}">
+
+
+                <div>
+                    <label for="username">用户名：</label>
+                    <input type="text" th:value="${user.username}" name="username" id="username"/>
+                    <span >*</span>
+                </div>
+
+                <div>
+                    <label for="realname">真实姓名：</label>
+                    <input type="text" th:value="${user.realname}" name="realname" id="realname" placeholder="xxxx"/>
+                    <span >*</span>
+                </div>
+
+                <div>
+                    <label >用户性别：</label>
+
+                    <select name="gender">
+                        <option value="1" th:selected="${user.gender == 1}" >男</option>
+                        <option value="2" th:selected="${user.gender == 2}"  selected>女</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="birthday">出生日期：</label>
+                    <input type="text" th:value="${#dates.format(user.birthday, 'yyyy-MM-dd')}" name="birthday" id="birthday" placeholder="2016年2月1日"/>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label >用户类别：</label>
+                     <!--1经理  2主管  3专员-->
+                    <input type="radio" name="userype" value="1"  th:checked="${user.usertype == 1}"/>经理
+                    <input type="radio" name="usertype" value="2" th:checked="${user.usertype == 2}" checked/>主管
+                    <input type="radio" name="usertype" value="3" th:checked="${user.usertype == 3}"/>专员
+                </div>
+                <div class="agencyAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="userList.html">返回</a>-->
+                    <input type="button" value="保存" onclick="$('#updateForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+</body>
+</html>

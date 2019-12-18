@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head" >
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header"></header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time"></section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>团组管理页面 >> 详细信息查看</span>
+        </div>
+        <div class="agencyView">
+            <p><strong>团组编号：</strong><span th:text="${teamAgency.tid}">ads-231</span></p>
+            <p><strong>团组人数：</strong><span th:text="${teamAgency.teamnum}" >22</span></p>
+            <p><strong>总金额：</strong><span th:text="${teamAgency.money}" >22</span></p>
+            <p><strong>是否vip：</strong><span th:text="${teamAgency.vip == 1 ? '是vip' : '非vip' }">否</span></p>
+            <p><strong>所属旅行社：</strong><span th:text="${teamAgency.agencyname}" >测试旅行社002</span></p>
+            <p><strong>创建时间：</strong><span th:text="${#dates.format(teamAgency.createDate, 'yyyy-MM-dd')}">2029/12/12 12:12:12</span></p>
+            <a onclick="history.back(-1)" href="#">返回</a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+</body>
+</html>

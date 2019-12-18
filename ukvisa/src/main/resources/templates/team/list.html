@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head" >
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header"></header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time"></section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left"></div>
+
+    </div>
+        <div class="right">
+            <div class="location">
+                <strong>你现在所在的位置是:</strong>
+                <span>团组管理页面</span>
+            </div>
+            <form id="searchForm" th:action="@{/teams}" th:method="get" >
+            <div class="search">
+
+
+                <span>团组名称：</span>
+                <input name="teamname"  th:value="${teamname}" type="text" placeholder="请输入旅行社的名称"/>
+                
+                <span>旅行社：</span>
+                <select name="aid" >
+                    <option value="">--请选择--</option>
+                    <option value=""
+                            th:each="a : ${agencys}"
+                            th:selected="${aid == a.aid}"
+                            th:value="${a.aid}"
+                            th:text="${a.agencyname}">xxx旅行社</option>
+                </select>
+
+                <span>是否vip：</span>
+                <select name="vip">
+                    <option value="">--请选择--</option>
+                    <option th:selected="${vip == 0}" value="0">非</option>
+					<option th:selected="${vip == 1}" value="1">是</option>
+                </select>
+
+                <!--<span>团组类别：</span>-->
+                <!--<select name="pay">vip-->
+                    <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                    <!--<option value="">SS</option>-->
+                    <!--<option value="">ADS</option>-->
+                    <!--<option value="">SVV</option>-->
+                <!--</select>-->
+
+                <input type="button" value="查询" onclick="$('#searchForm').submit()"/>
+                <a th:href="@{/team}" href="../team/add.html">添加团组</a>
+            </div>
+			</form>
+            <!--团组表格 样式和旅行社公用-->
+            <table class="agencyTable" cellpadding="0" cellspacing="0">
+                <tr class="firstTr">
+                    <th width="10%">团组名</th>
+                    <th width="10%">总人数</th>
+                    <th width="10%">总金额</th>
+                    <th width="10%">是否vip</th>
+                    <th width="10%">所属旅行社</th>
+                    <th width="10%">创建时间</th>
+                    <th width="30%">操作</th>
+                </tr>
+                <tr th:each="t : ${teamAgencys}">
+                    <td th:text="${t.teamname}">123</td>
+                    <td th:text="${t.teamnum}">1000</td>
+                    <td th:text="${t.money}">1000</td>
+                    <td th:text="${t.vip == 1 ? '是' : '非'}">非vip</td>
+                    <td th:text="${t.agencyname}">1</td>
+                    <td th:text="${#dates.format(t.createDate, 'yyyy-MM-dd')}"></td>
+                    <td>
+                        <a th:href="@{/team/}+${t.tid}" href="view.html"><img th:img="@{/img/read.png}" src="../img/read.png" alt="查看" title="查看"/></a>
+                        <a th:href="@{/team/}+${t.tid}+'?type=update'" href="update.html"><img th:img="@{/img/xiugai.png}" src="../img/xiugai.png" alt="修改" title="修改"/></a>
+                        <a  th:attr="del_uri=@{/team/}+${t.tid}" href="#" class="delete" ><img th:img="@{/img/schu.png}" src="../img/schu.png" alt="删除" title="删除"/></a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </section>
+
+	<!--点击删除按钮后弹出的页面-->
+	<div class="zhezhao"></div>
+	<form method="post" id="deleteForm">
+		<input type="hidden" name="_method" value="delete">
+		<div class="remove" id="removeProv">
+		   <div class="removerChid">
+			   <h2>提示</h2>
+			   <div class="removeMain" >
+				   <p>你确定要删除吗？</p>
+				   <a href="#" id="yes">确定</a>
+				   <a href="#" id="no">取消</a>
+			   </div>
+		   </div>
+		</div>
+	</form>
+    <footer class="footer" th:replace="main/public :: #public_footer">
+    </footer>
+
+
+</body>
+</html>

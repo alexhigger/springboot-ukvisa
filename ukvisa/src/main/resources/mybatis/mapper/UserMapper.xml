@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzh.ukvisa.mapper.UserMapper">
+
+
+    <!--模糊查询-->
+    <select id="getUsers" resultType="com.wzh.ukvisa.entities.User">
+        select * from user where 1=1
+        <if test="username != null and username != ''">
+            <!--${} 用于字符串拼接-->
+            and username like '%${username}%'
+        </if>
+    </select>
+
+
+    <!---->
+    <select id="getUserByUsername" resultType="com.wzh.ukvisa.entities.User">
+    select * from `user` where upper(username) = upper(#{username})
+    </select>
+
+
+    <select id="getUserById" resultType="com.wzh.ukvisa.entities.User">
+      select * from `user` where id = #{id}
+    </select>
+
+    <!--新增-->
+    <insert id="addUser" >
+        INSERT INTO `user` ( `username`, `realname`, `password`, `gender`, `birthday`, `usertype`)
+        VALUES ( #{username}, #{realname}, #{password}, #{gender}, #{birthday}, #{usertype})
+    </insert>
+
+    <!--改user信息-->
+    <update id="updateUser">
+        UPDATE `user`
+        SET `username`=#{username}, `realname`=#{realname}, `password`=#{password},
+        `gender`=#{gender}, `birthday`=#{birthday}, `usertype`=#{usertype}
+        WHERE `id`= #{id}
+    </update>
+
+    <!--删除user信息通过用户id-->
+    <delete id="deleteUserById">
+    delete from `user`
+    where id = #{id}
+    </delete>
+
+
+</mapper>

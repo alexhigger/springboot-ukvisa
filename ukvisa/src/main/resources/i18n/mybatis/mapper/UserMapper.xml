@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzh.ukvisa.mapper.UserMapper">
+
+
+        <!--找所有的User，用于数据的回显-->
+        <select id="getUsers" resultType="com.wzh.ukvisa.entities.User">
+            select * from user where 1=1
+            <if test="agencyname != null and agencyname != ''">
+                <!--${} 用于字符串拼接-->
+                and agencyname like '%${agencyname}%'
+            </if>
+        </select>
+
+
+        <!--通过用户id来找具体的用户-->
+         <select id="getUserById" resultType="com.wzh.ukvisa.entities.User">
+            select * from user where id=#{id}
+         </select>
+
+
+        <!--新增user-->
+        <insert id="addUser" >
+          INSERT INTO `visa`.`user` ( `username`, `realname`, `password`, `gender`, `birthday`, `usertype`)
+          VALUES (#{username},#{realname},#{password},#{gender},#{birthday},#{usertype});
+        </insert>
+
+
+        <!--删除用户-->
+        <delete id="deleteUserById">
+        delete from user where id=#{id}
+        </delete>
+
+
+
+        <!--改user信息 update-->
+        <update id="updateUser">
+        UPDATE `visa`.`user`
+         SET  `username`=#{username}, `realname`=#{realname}, `password`=#{password}, `gender`=#{gender}, `birthday`=#{birthday}, `usertype`=#{usertype}
+         WHERE (`id`=#{id});
+        </update>
+
+
+</mapper>

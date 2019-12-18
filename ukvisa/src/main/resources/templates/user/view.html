@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head" >
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header"></header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time"></section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>用户管理页面 >> 用户信息查看页面</span>
+        </div>
+        <div class="agencyView">
+            <p><strong>用户名：</strong><span th:text="${user.username}">amy</span></p>
+            <p><strong>真实姓名：</strong><span th:text="${user.realname}">xxxx</span></p>
+            <p><strong>用户性别：</strong><span th:text="${user.gender == 1 ? '男' : '女'}">女</span></p>
+            <p><strong>出生日期：</strong><span th:text="${#dates.format(user.birthday, 'yyyy-MM-dd')}">2011/2/1</span></p>
+            <p><strong>用户类别：</strong><span th:text="${user.usertype==1 ? '经理' : (user.usertype==2 ? '主管' : '专员')}">经理</span></p>
+            <a onclick="history.back(-1)" href="#">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+
+</body>
+</html>

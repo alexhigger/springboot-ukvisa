@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head" >
+
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='agency')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>旅行社管理页面</span>
+        </div>
+        <form id="searchForm" th:action="@{/agencys}" th:method="get">
+            <div class="search">
+
+
+                <span>旅行社名称：</span>
+                <input type="text" th:value="${agencyname}" name="agencyname" placeholder="请输入旅行社的名称"/>
+
+
+
+                <!--查询按钮-->
+                <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
+                <!--添加按钮-->
+                <a  th:href="@{/agency}" href="add.html">添加旅行社</a>
+            </div>
+        </form>
+
+        <!--旅行社操作表格-->
+        <table class="agencyTable" cellpadding="0" cellspacing="0">
+            <tr class="firstTr">
+                <th width="10%">旅行社编码</th>
+                <th width="20%">旅行社名称</th>
+                <th width="10%">联系人</th>
+                <th width="10%">联系电话</th>
+                <th width="10%">传真</th>
+                <th width="10%">创建时间</th>
+                <th width="30%">操作</th>
+            </tr>
+            <tr th:each="a : ${agencys}">
+                <td th:text="${a.aid}">PRO-CODE—001</td>
+                <td th:text="${a.agencyname}">测试旅行社001</td>
+                <td th:text="${a.people}">韩露</td>
+                <td th:text="${a.phone}">15918230478</td>
+                <td th:text="${a.fax}">15918230478</td>
+                <td th:text="${#dates.format( a.createDate, 'yyyy-MM-dd')}">2015-11-12</td>
+                <td>
+                    <a th:href="@{/agency/}+${a.aid}" href="view.html"><img th:img="@{/img/read.png}" src="../img/read.png" alt="查看" title="查看"/></a>
+                    <a th:href="@{/agency/}+${a.aid}+'?type=update'" href="update.html"><img th:img="@{/img/xiugai.png}" src="../img/xiugai.png" alt="修改" title="修改"/></a>
+                    <!--<a href="#" class="delete"><img src="../img/schu.png" alt="删除" title="删除"/></a>-->
+                    <a  th:attr="del_uri=@{/agency/}+${a.aid}" href="#" class="delete" ><img th:img="@{/img/schu.png}" src="../img/schu.png" alt="删除" title="删除"/></a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</section>
+
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<form method="post" id="deleteForm">
+    <input type="hidden" name="_method" value="delete">
+    <div class="remove" id="removeProv">
+        <div class="removerChid">
+            <h2>提示</h2>
+            <div class="removeMain" >
+                <p>你确定要删除吗？</p>
+                <a href="#" id="yes">确定</a>
+                <a href="#" id="no">取消</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<footer class="footer" th:replace="main/public :: #public_footer">
+
+</footer>
+
+</body>
+</html>

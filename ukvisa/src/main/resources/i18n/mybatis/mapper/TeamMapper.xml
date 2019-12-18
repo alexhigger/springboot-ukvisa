@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzh.ukvisa.mapper.TeamMapper">
+
+        <select id="getTeams" resultType="com.wzh.ukvisa.entities.TeamAgency">
+                select t.*, a.agencyname from team t left join agency a on t.aid = a.aid
+                where 1=1
+                /*根据名字模糊查询*/
+                <if test="teamname != null and teamname != ''">
+                        and t.teamname like '%${teamname}%'
+                </if>
+                /*根据旅行社查询*/
+                <if test="aid != null ">
+                        and t.aid = #{aid}
+                </if>
+                /*是否vip*/
+                <if test="vip != null ">
+                        and t.vip = #{vip}
+                </if>
+        </select>
+
+        <select id="getTeamByTid" resultType="com.wzh.ukvisa.entities.TeamAgency">
+        select t.*, a.agencyname from team t left join agency a on t.aid = a.aid
+        where t.tid = #{tid}
+        </select>
+
+        <insert id="addTeam" >
+       INSERT INTO `team` (  `teamname`,  `teamnum`, `money`, `vip`, `aid`,
+        `createDate`)
+        VALUES (  #{teamname},  #{teamnum}, #{money}, #{vip}, #{aid}, now());
+
+        </insert>
+
+    <update id="updateTeam">
+    UPDATE team
+    SET teamname = #{teamname},
+          teamnum = #{teamnum},
+          money = #{money},
+          vip= #{vip},
+          aid = #{aid},
+          createDate= now()
+    WHERE tid = #{tid}
+  </update>
+
+        <delete id="deleteTeamByTid">
+        delete from team where tid=#{tid}
+        </delete>
+
+</mapper>

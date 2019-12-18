@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head" >
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header"></header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time"></section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>团组管理页面 >> 团组修改页面</span>
+        </div>
+        <div class="agencyAdd">
+            <form action="#" id="updateForm" th:action="@{/team}" th:method="post" >
+                <!--
+                发送put请求修改旅行社信息
+                1. 在SpringMVC中配置HiddenHttpMethodFilter（SpringBoot自动配置好了）
+                2. 页面创建一个method="post"表单
+                3. 创建一个input标签 name="_method"，value="指定请求方式"
+                -->
+                <input type="hidden" name="_method" value="put"/>
+                <input type="hidden" name="tid" th:value="${teamAgency.tid}"/>
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div class="">
+                    <label for="teamname">团组编码：</label>
+                    <input type="text" th:value="${teamAgency.teamname}" name="teamname" id="teamname" placeholder=""/>
+                    <span>*</span>
+                </div>
+                <!-- <div>
+                    <label for="teamName">团组名称：</label>
+                    <input type="text" name="teamName" id="teamName" placeholder=""/>
+                    <span >*</span>
+                </div> -->
+                <!-- <div>
+                    <label for="teamCom">团组单位：</label>
+                    <input type="text" name="teamCom" id="teamCom" placeholder=""/>
+                    <span>*</span>
+
+                </div> -->
+                <div>
+                    <label for="teamnum">团组人数：</label>
+                    <input type="text" th:value="${teamAgency.teamnum}" name="teamnum" id="teamnum" placeholder=""/>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for="money">总金额：</label>
+                    <input type="text" th:value="${teamAgency.money}" name="money" id="money" placeholder=""/>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label >所属旅行社：</label>
+                    <!--<select name="pid" >-->
+                        <!--<option value="">&#45;&#45;请选择相应的旅行社-</option>-->
+                        <!--<option value="">竹园旅行社</option>-->
+                        <!--<option value="">全景旅游</option>-->
+                    <!--</select>-->
+                    <select name="aid" >
+                        <!--<option value="" >&#45;&#45;旅行社&#45;&#45;</option>-->
+                        <option value=""
+                                th:selected="${teamAgency.aid == a.aid}"
+                                th:each="a : ${agencys}" th:value="${a.aid}"
+                                th:text="${a.agencyname}" >旅行社</option>
+                    </select>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label >是否vip：</label>
+                    <input type="radio" value="0" name="vip" th:checked="${teamAgency.vip == 0}" />非
+                    <input type="radio" value="1" name="vip" th:checked="${teamAgency.vip == 1}"/>是
+                </div>
+                <div class="agencyAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="teamList.html">返回</a>-->
+                    <input type="button" value="保存" onclick="$('#updateForm').submit();"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+</body>
+</html>
