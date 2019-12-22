@@ -88,9 +88,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'howard', '江半城', '123', '1', '1989-12-12 00:00:00.0', '2');
-INSERT INTO `user` VALUES ('3', 'meily', '裴狗哥', '123', '2', '1997-11-23', '3');
-INSERT INTO `user` VALUES ('4', 'dora', '杨海堂', '123', '2', '1989-05-06', '3');
-INSERT INTO `user` VALUES ('5', 'amy', '葛俊清', '123', '2', '1987-02-11', '1');
-INSERT INTO `user` VALUES ('9', 'alex', '吴镇海', '123', '1', '2019-12-12 00:00:00.0', '3');
-INSERT INTO `user` VALUES ('14', 'root', '吴镇海', '123', '1', '2019-12-12 00:00:00.0', '2');
+INSERT INTO `user` VALUES ('1', 'howard', '江xx', '123', '1', '1989-12-12 00:00:00.0', '2');
+INSERT INTO `user` VALUES ('3', 'meily', '裴xx', '123', '2', '1997-11-23', '3');
+INSERT INTO `user` VALUES ('4', 'dora', '杨xx', '123', '2', '1989-05-06', '3');
+INSERT INTO `user` VALUES ('5', 'amy', '葛xx', '123', '2', '1987-02-11', '1');
+INSERT INTO `user` VALUES ('9', 'alex', '吴xx', '123', '1', '2019-12-12 00:00:00.0', '3');
+INSERT INTO `user` VALUES ('14', 'root', '吴xx', '123', '1', '2019-12-12 00:00:00.0', '2');
